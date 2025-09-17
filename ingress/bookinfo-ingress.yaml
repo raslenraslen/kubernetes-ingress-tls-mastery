@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1   # fixe : version de l'API Kubernetes pour Ingress
+kind: Ingress                      # fixe : type de ressource, toujours Ingress
+metadata:
+  name: bookinfo-ingress           # modifiable : nom de ton Ingress, ex: myapp-ingress
+  namespace: default                # modifiable : namespace où sont tes services
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /   # modifiable : spécifique à Nginx, tu peux changer ou ajouter d'autres annotations
+spec:
+  rules:                            # fixe : structure obligatoire pour les règles
+  - http:                           # fixe : indique que ce sont des règles HTTP
+      paths:                        # fixe : liste des chemins à router
+      - path: /productpage          # modifiable : chemin externe pour accéder au service, ex: /api ou /frontend
+        pathType: Prefix            # modifiable/fixe : Prefix ou Exact, selon comment tu veux matcher le chemin
+        backend:                     # fixe : définit le service cible
+          service:
+            name: productpage       # modifiable : nom du service Kubernetes à exposer
+            port:
+              number: 9080          # modifiable : port du service Kubernetes
