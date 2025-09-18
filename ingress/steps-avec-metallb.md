@@ -92,3 +92,19 @@ __Vérifier que l'Ingress a été créé et reconnu par le Controller :__
 ``````
 kubectl get ingress -n default
 ``````
+__Étape 4 : Accéder à Votre Application ! 🌐__
+Tout est configuré ! Accédez à votre application en utilisant l'IP du LoadBalancer de votre Nginx Ingress Controller.
+
+Rappelez l'EXTERNAL-IP de votre ingress-nginx-controller notée à l'Étape 2 (par exemple : 192.168.216.151).
+Construisez l'URL d'accès complète :
+````
+http://<EXTERNAL-IP-Nginx-Controller>/<chemin-de-ton-ingress>`
+````
+Exemple avec vos valeurs :
+http://192.168.216.151/productpage
+Ouvrez cette URL dans votre navigateur ! 🥳`
+
+Vous devriez voir la page frontend de votre application Bookinfo s'afficher, cette fois-ci via une IP de LoadBalancer stable !
+
+
+![alt text](Screenshots/ingress-load.PNG)
