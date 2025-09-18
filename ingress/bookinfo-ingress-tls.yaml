@@ -5,14 +5,12 @@ metadata:
   namespace: default
 spec:
   ingressClassName: nginx 
-  # AJOUTE CETTE NOUVELLE SECTION TLS
   tls:
   - hosts:
     - bookinfo.kube.local # ⬅️ Ton nom de domaine pour lequel le certificat est valide
     secretName: bookinfo-tls # ⬅️ Le nom du Secret TLS que tu viens de créer
   rules:
-  
-    http:
+  - http: 
       paths:
       - path: /productpage
         pathType: Prefix

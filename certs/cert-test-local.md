@@ -1,5 +1,16 @@
 #  Partie 1 : Création et Utilisation d'un Certificat SSL/TLS Auto-Signé (pour le Test Local)
 
+__prerequis__
+
+Cluster Kubernetes opérationnel, MetalLB configuré, Nginx Ingress Controller déployé (exposé via LoadBalancer).  
+Application Bookinfo déployée dans le namespace default.  
+Un nom de domaine de test configuré dans votre fichier hosts (ex: bookinfo.kube.local pointant vers l'EXTERNAL-IP de votre Ingress Controller).  
+L'Ingress bookinfo-ingress est configuré (sans TLS pour le moment) pour ce domaine et pointe vers /productpage.  
+
+__Objectif__
+
+Comprendre et mettre en pratique le chiffrement HTTPS avec un certificat auto-signé.
+
 # Étape 1 : Préparer un dossier de travail et définir les informations du certificat
 
 Pour générer notre certificat, nous allons utiliser l'outil openssl.
@@ -51,7 +62,7 @@ DNS.1 = bookinfo.kube.local # ⬅️ REMPLACE PAR TA VALEUR EX: bookinfo.kube.lo
 
 
 ````
-openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:2048 -keyout $DOMAIN_NAME.key -out $DOMAIN_NAME.crt -subj "/CN=$DOMAIN_NAME/O=MyTestOrg"
+openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:2048 -keyout $DOMAIN_NAME.key -out $DOMAIN_NAME.crt -config san.cnf -extensions req_ext
 ````
  **Explication de la commande openssl** 
 
@@ -123,7 +134,7 @@ spec:
 
 
 ````
-kubectl apply -f ~/tutenv/ingress/bookinfo-ingress.yaml
+kubectl apply -f ~/tutenv/ingress/bookinfo-ingress-tls.yaml
 ````
 
 # Étape 5 : Recharger l'Ingress Controller et Tester l'Accès HTTPS
