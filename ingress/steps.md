@@ -1,6 +1,6 @@
 #  Guide Complet : Installation Nginx Ingress Controller et Exposition d'Application
 
-__Exécuter la commande d'installation__
+__1- Exécuter la commande d'installation__
 
 `````
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.10.0/deploy/static/provider/baremetal/deploy.yaml
@@ -10,7 +10,7 @@ Cette commande va créer un nouveau namespace ingress-nginx et y déployer le co
 
 Tu verras des messages created pour les différents objets Kubernetes (Namespace, ServiceAccount, Role, ClusterRole, ConfigMap, Deployment, Service, etc.).
 
-**Vérifier le déploiement de l'Ingress Controller :**
+**2- Vérifier le déploiement de l'Ingress Controller :**
 
 ```````
 kubectl get pods -n ingress-nginx -w
@@ -25,3 +25,6 @@ Le plus important est le pod ingress-nginx-controller-XXXXX. Il doit être en Ru
 
 
 ![alt text](ingress.PNG)
+
+
+
