@@ -108,3 +108,39 @@ Vous devriez voir la page frontend de votre application Bookinfo s'afficher, cet
 
 
 ![alt text](Screenshots/ingress-load.PNG)
+
+
+# Accéder avec un Nom de Domaine (Optionnel, mais recommandé en production) 🌍
+
+
+__En environnement de Production :__ Achetez et configurez un nom de domaine.  
+
+Si vous avez un vrai nom de domaine (ex: example.com), accédez à l'interface de votre fournisseur DNS (GoDaddy, Gandi, Cloudflare, etc.).  
+Créez un enregistrement A pour votre sous-domaine (ex: bookinfo.example.com).  
+Faites pointer cet enregistrement A vers l'EXTERNAL-IP de votre ingress-nginx-controller (l'IP obtenue à l'Étape 2, ex: 192.168.216.151).  
+
+
+__Pour un Test Local (sans acheter de domaine) :__ Modifiez votre fichier hosts.
+C'est la méthode que nous utilisons en labo pour simuler un nom de domaine localement.`
+
+Choisissez un nom de domaine de test (ex: bookinfo.kube.local).
+
+`````
+sudo nano  /etc/hosts 
+``````
+et entrer par exemple `selon l'adresse de ingress-nginx-controller  et votre domaine de test
+``````
+192.168.216.151   bookinfo.kube.local
+``````
+
+
+__Sous Windows :__
+
+__Windows : C:\Windows\System32\drivers\etc\hosts__
+
+Ajoutez la ligne suivante à la fin du fichier (remplacez l'IP par celle de votre ingress-nginx-controller et bookinfo.kube.local par votre domaine de test) :
+````
+192.168.216.151   bookinfo.kube.local
+``````
+
+![alt text](Screenshots/ingress-load-test.PNG)
