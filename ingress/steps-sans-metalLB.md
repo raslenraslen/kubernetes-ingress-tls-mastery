@@ -1,6 +1,14 @@
-#  Guide Complet : Installation Nginx Ingress Controller et Exposition d'Application
+# 🚀 Guide Complet : Installation Nginx Ingress Controller et Exposition d'Application sans MetalLB
 
-__1- Exécuter la commande d'installation__
+
+__prerquis__
+
+Un cluster Kubernetes fonctionnel (ex: kubeadm, Kind, Minikube).  
+Votre application (ici, Bookinfo) déjà déployée et ses services ClusterIP fonctionnels.  
+Le nœud Control Plane untainté si vous déployez l'Ingress Controller dessus.  
+
+
+__1- Exécuter la commande d'installation__ 🛠️
 
 `````
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.10.0/deploy/static/provider/baremetal/deploy.yaml
@@ -11,7 +19,7 @@ Cette commande va créer un nouveau namespace ingress-nginx et y déployer le co
 Tu verras des messages created pour les différents objets Kubernetes (Namespace, ServiceAccount, Role, ClusterRole, ConfigMap, Deployment, Service, etc.).
 
 
-**2- Vérifier le déploiement de l'Ingress Controller :**
+**2- Vérifier le déploiement de l'Ingress Controller :** ✅
 
 ```````
 kubectl get pods -n ingress-nginx -w
@@ -29,7 +37,7 @@ Le plus important est le pod ingress-nginx-controller-XXXXX. Il doit être en Ru
 
 
 
-** 3- Vérifier le Service d'exposition de l'Ingress Controller : **
+** 3- Vérifier le Service d'exposition de l'Ingress Controller : **  🚪
 ````
 kubectl get svc -n ingress-nginx`
 `````
@@ -41,7 +49,7 @@ Note bien son TYPE (probablement NodePort) et ses PORT(S). Par exemple : 80:3233
 ![alt text](Screenshots/svc-ingress.PNG)
 
 
-** Étape 3 : Création de l'objet Ingress pour Bookinfo **
+** Étape 4 : Création de l'objet Ingress pour Bookinfo **  🗺️
 
 
 __Créer un nouveau fichier YAML :__
@@ -76,7 +84,7 @@ spec:
 
 ```````
 
-__Étape 4 : Appliquer l'objet Ingress au cluster__
+__Étape 5 : Appliquer l'objet Ingress au cluster__ ✨
 
 **Appliquer le fichier YAML :**
 
@@ -92,9 +100,9 @@ kubectl get ingress -n default
 
 ![alt text](Screenshots/ingress2.PNG)
 
+**Étape 6 : Accéder à Votre Application !** 🌐
 
-
-**Récupérer l'adresse IP de ton nœud Kubernetes :**  
+**Récupérer l'adresse IP de ton nœud Kubernetes :**    
 
 C'est l'adresse IP de la machine physique ou virtuelle (le control plane où est déployé l'Ingress Controller).
 ````
@@ -113,4 +121,9 @@ par exemple
 
 `````
 http://192.168.216.141:31347/productpage
+
 ``````
+
+
+Ouvrez cette URL dans votre navigateur ! 🥳  
+Vous devriez voir la page frontend de votre application Bookinfo s'afficher !  
