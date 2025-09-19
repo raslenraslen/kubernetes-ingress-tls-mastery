@@ -14,10 +14,11 @@ Cette phase se concentre sur l'exposition d'applications sur un cluster Kubernet
 
 1.  **Exposition via NodePort (HTTP) : Le B.A.B.A de l'Ingress Local**
     *   Apprenez à installer Nginx Ingress Controller et à exposer une application en HTTP en utilisant un `NodePort` sur un cluster local.
-    *   **[Accéder au guide détaillé de l'Ingress Local (NodePort HTTP)](./ingress/ingress-local-nodepoint.md)** ⬅️ 
+    *   **[Accéder au guide détaillé de l'Ingress Local (NodePort HTTP)](./ingress/ingress-local.md)** ⬅️ **(Nom de fichier ajusté : `ingress-local.md`)**
+
 2.  **Exposition via MetalLB (HTTP) : Simuler un LoadBalancer Local**
     *   Découvrez comment utiliser MetalLB pour obtenir une `EXTERNAL-IP` de type `LoadBalancer` sur un cluster bare-metal local, offrant une URL plus propre que le `NodePort`.
-    *   **[Accéder au guide détaillé de l'Ingress Local avec MetalLB (HTTP)](./ingress/ingress-metallb-local.md)** ⬅️ 
+    *   **[Accéder au guide détaillé de l'Ingress Local avec MetalLB (HTTP)](./ingress/steps-avec-metallb.md)** ⬅️ **(Nom de fichier ajusté : `steps-avec-metallb.md`)**
 
 ---
 
@@ -27,7 +28,7 @@ Cette phase explore la mise en place du HTTPS avec des certificats auto-signés 
 
 1.  **Certificat Auto-Signé avec Nginx Ingress (HTTPS avec avertissement)**
     *   Comprenez le fonctionnement des certificats SSL/TLS en générant un certificat auto-signé et en l'appliquant à votre Ingress local pour activer le HTTPS.
-    *   **[Accéder au guide détaillé du Certificat Auto-Signé Local](./certs/cert-autosigned-local.md)** ⬅️ 
+    *   **[Accéder au guide détaillé du Certificat Auto-Signé Local](./certs/cert-autosigned-local.md)** ⬅️ *(Assurez-vous que ce fichier existe dans `~/tutenv/certs/`)*
 
 ---
 
@@ -45,6 +46,6 @@ Cette phase représente l'objectif final : déployer une application sur le clou
 
 3.  **Certificats Let's Encrypt avec Cert-Manager (HTTPS Cadenas Vert)**
     *   La culmination : installez Cert-Manager sur AKS, configurez-le avec Let's Encrypt et obtenez un certificat TLS/SSL de production, garantissant un cadenas vert dans votre navigateur.
-    *   **[Accéder au guide détaillé des Certificats de Production (Let's Encrypt sur AKS)](./cert-prod-aks.md)** ⬅️ *(Ceci est le guide que nous venons de finaliser)*
+    *   **[Accéder au guide détaillé des Certificats de Production (Let's Encrypt sur AKS)](./cert-prod-aks.md)** ⬅️ *(Assurez-vous que ce fichier existe à la racine de `~/tutenv`)*
 
 ---

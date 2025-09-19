@@ -193,7 +193,7 @@ Nous allons maintenant modifier l'objet Ingress de votre application pour qu'il 
     *   Pour s'assurer que Nginx prend en compte le nouveau certificat et la règle de redirection HTTPS :
         ```bash
         kubectl delete pod -n ingress-nginx -l app.kubernetes.io/component=controller
-        # Laissez le nouveau pod démarrer.
+       
         ```
 
 5.  **Test Final de l Sécurisation HTTPS :**
