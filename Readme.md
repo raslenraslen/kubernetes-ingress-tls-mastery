@@ -23,7 +23,7 @@ Cette phase se concentre sur l'exposition d'applications sur un cluster Kubernet
 
 2.  **Nginx Ingress Controller, DNS Public  (Pré-configuration HTTP)**
     *   Apprenez à installer Nginx Ingress Controller sur AKS, à configurer un nom de domaine public (ex: DuckDNS) 
-    *   **[Accéder au guide détaillé de l'Ingress Cloud (HTTP)](./ingress/steps-dans-cloud-azure.md)** 
+    *   **[Accéder au guide détaillé de l'Ingress Cloud (HTTP)](./ingress/steps-dans-le-cloud-azure.md)** 
 
 
 
