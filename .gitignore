@@ -1,0 +1,4 @@
+# Ignore Terraform files for cluster-AKS-terraform
+/cluster-AKS-terraform/terraform.tfstate
+/cluster-AKS-terraform/.terraform/
+/cluster-AKS-terraform/.terraform.lock.hcl
