@@ -23,7 +23,7 @@ Votre kubectl est configuré pour interagir avec ce cluster AKS.
 **Votre application "Online Boutique Frontend" est prête à être déployée,**
 ````
 kubectl create ns  test
-cd ~/tutenv/app-de-test-2
+cd ~/tutenv/app-de-test-2/manifests
 kubectl apply -f angular-app-deployment.yaml
 kubectl apply -f angular-app-service.yaml  
 
