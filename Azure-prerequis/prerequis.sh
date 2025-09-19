@@ -15,25 +15,24 @@ sudo apt install -y azure-cli
 # 5. Vérifier l’installation
 az version
 
-az login                         # Connexion à ton compte Azure
-az account show                 # Voir ton abonnement actuel
-az account list --output table  # Lister tous tes abonnements
+az login                         
+az account show                 
+az account list --output table  
 
 
 
 az aks show --resource-group rg-raslen-cert --name raslen-cert-aks --query nodeResourceGroup -o tsv
 
 
-NODE_RG_NAME="MC_rg-raslen-cert_raslen-cert-aks_eastus" # La variable est maintenant définie
+NODE_RG_NAME="MC_rg-raslen-cert_raslen-cert-aks_eastus" 
 az network nsg list --resource-group $NODE_RG_NAME --query "[].name" -o tsv
 
 
-NODE_RG_NAME="MC_rg-raslen-cert_raslen-cert-aks_eastus" # Groupe de ressources des nœuds
-NSG_NAME="aks-agentpool-23211147-nsg" # ⬅️ Nom du NSG trouvé
+NODE_RG_NAME="MC_rg-raslen-cert_raslen-cert-aks_eastus" 
+NSG_NAME="aks-agentpool-23211147-nsg" 
 
 echo "Ajout des règles au NSG : $NSG_NAME dans le groupe $NODE_RG_NAME"
 
-# Règle pour HTTP (port 80)
 az network nsg rule create \
   --resource-group $NODE_RG_NAME \
   --nsg-name $NSG_NAME \
