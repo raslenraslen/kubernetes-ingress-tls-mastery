@@ -12,7 +12,7 @@ Cliquez sur les liens ci-dessous pour accéder aux guides pas à pas de chaque �
 
 Cette phase se concentre sur l'exposition d'applications sur un cluster Kubernetes local (Kubeadm, Minikube, Kind).
 
-1.  **Exposition via NodePort (HTTP) : Le B.A.B.A de l'Ingress Local**
+1.  **Exposition via NodePort (HTTP) : Les Bases de l'Ingress Local**
     *   Apprenez à installer Nginx Ingress Controller et à exposer une application en HTTP en utilisant un `NodePort` sur un cluster local.
     *   **[Accéder au guide détaillé de l'Ingress Local (NodePort HTTP)](./ingress/ingress-local.md)** ⬅️ 
 
