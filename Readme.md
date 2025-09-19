@@ -36,7 +36,7 @@ Cette phase explore la mise en place du HTTPS avec des certificats auto-signés 
 
 1.  **Certificat Auto-Signé avec Nginx Ingress (HTTPS avec avertissement)**
     *   Comprenez le fonctionnement des certificats SSL/TLS en générant un certificat auto-signé et en l'appliquant à votre Ingress local pour activer le HTTPS.
-    *   **[Accéder au guide détaillé du Certificat Auto-Signé Local](./certs/cert-autosigned-local.md)** ⬅️ 
+    *   **[Accéder au guide détaillé du Certificat Auto-Signé Local](./certs/auto-signé/cert-test-local.md)** ⬅️ 
 
 ---
 
@@ -48,12 +48,12 @@ Cette phase représente l'objectif final : déployer une application sur le clou
     *   Guide de la création d'un cluster Azure Kubernetes Service (AKS) en utilisant Terraform.
     *   **[Accéder aux fichiers de configuration Terraform](./cluster-AKS-terraform/)** ⬅️ 
 
-2.  **Nginx Ingress Controller, DNS Public & NSG Azure (Pré-configuration HTTP)**
-    *   Apprenez à installer Nginx Ingress Controller sur AKS, à configurer un nom de domaine public (ex: DuckDNS) et les règles de Network Security Group (NSG) pour l'accès HTTP.
-    *   **[Accéder au guide détaillé de l'Ingress Cloud (HTTP)](./ingress/steps-dans-cloud-azure.md)**
+2.  **Nginx Ingress Controller, DNS Public (Pré-configuration HTTP)**
+    *   Apprenez à installer Nginx Ingress Controller sur AKS, à configurer un nom de domaine public (ex: DuckDNS) 
+    *   **[Accéder au guide détaillé de l'Ingress Cloud (HTTP)](./ingress/steps-dans-le-cloud-azure.md)**
 
-3.  **Certificats Let's Encrypt avec Cert-Manager (HTTPS Cadenas Vert)**
-    *   La culmination : installez Cert-Manager sur AKS, configurez-le avec Let's Encrypt et obtenez un certificat TLS/SSL de production, garantissant un cadenas vert dans votre navigateur.
-    *   **[Accéder au guide détaillé des Certificats de Production (Let's Encrypt sur AKS)](./cert-prod-aks.md)** ⬅️ 
+3.  **Certificats Let's Encrypt avec Cert-Manager (HTTPS Cadenas )**
+    *   La culmination : installez Cert-Manager sur AKS, configurez-le avec Let's Encrypt et obtenez un certificat TLS/SSL de production, garantissant un cadenas  dans votre navigateur.
+    *   **[Accéder au guide détaillé des Certificats de Production (Let's Encrypt sur AKS)](./certs/cert-prod/steps.md)** ⬅️ 
 
 ---
