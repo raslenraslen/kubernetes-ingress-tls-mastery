@@ -26,7 +26,7 @@ kubectl create ns  test
 cd ~/tutenv/app-de-test-2/manifests  
 kubectl apply -f angular-app-deployment.yaml -n test 
 kubectl apply -f angular-app-service.yaml -n test
-kubectl get pods -n test -l app=online-boutique-frontend -w
+kubectl get pods -n test -l app=online-boutique-frontend 
 kubectl get svc -n test online-boutique-frontend-service
 ````
 
