@@ -154,3 +154,4 @@ Après l'avoir accepté, la page Bookinfo devrait s'afficher correctement, cette
 
 
 ![alt text](Screenshots/cert-auto.PNG)
+
