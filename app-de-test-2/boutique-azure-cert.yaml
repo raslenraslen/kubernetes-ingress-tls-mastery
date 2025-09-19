@@ -5,14 +5,15 @@ metadata:
   namespace: test
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true" 
 spec:
   ingressClassName: nginx 
   tls:
   - hosts:
-    - 52.188.24.221.sslip.io # ⬅️ REMPLACE PAR LE NOUVEAU NOM
+    - rasleneboutique.duckdns.org
     secretName: boutique-tls-prod
   rules:
-  - host: 52.188.24.221.sslip.io # ⬅️ REMPLACE PAR LE NOUVEAU NOM
+  - host: rasleneboutique.duckdns.org
     http:
       paths:
       - path: /
