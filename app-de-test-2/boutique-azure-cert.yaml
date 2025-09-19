@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: boutique-ingress
+  namespace: test
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+spec:
+  ingressClassName: nginx 
+  tls:
+  - hosts:
+    - 52.188.24.221.sslip.io # ⬅️ REMPLACE PAR LE NOUVEAU NOM
+    secretName: boutique-tls-prod
+  rules:
+  - host: 52.188.24.221.sslip.io # ⬅️ REMPLACE PAR LE NOUVEAU NOM
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: online-boutique-frontend-service
+            port:
+              number: 80
