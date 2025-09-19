@@ -157,7 +157,7 @@ Nous allons maintenant modifier l'objet Ingress de votre application pour qu'il 
       ingressClassName: nginx 
       tls:
       - hosts:
-        - rasleneboutique.duckdns.org # ⬅️ Votre nom de domaine public (DuckDNS)
+        - rasleneboutique.duckdns.org 
         secretName: boutique-tls-prod # ⬅️ Nom du Secret où Cert-Manager stockera le certificat
       rules:
       - host: rasleneboutique.duckdns.org # ⬅️ Votre nom de domaine public (DuckDNS)
