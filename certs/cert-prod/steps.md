@@ -74,3 +74,140 @@ Maintenant que l'infrastructure réseau et l'exposition HTTP de votre applicatio
 
 ---
 
+![alt text](Screenshots/cert-deployé.PNG)
+
+
+
+### **2. Configuration du `ClusterIssuer` pour Let's Encrypt** 🔐
+
+Le `ClusterIssuer` est la ressource Cert-Manager qui définit la "recette" pour obtenir les certificats. Nous allons le configurer pour interagir avec Let's Encrypt en utilisant la méthode de validation `HTTP-01`.
+
+1.  **Création du fichier `letsencrypt-prod-clusterissuer.yaml` :**
+    *   Assurez-vous d'être dans un dossier de configuration (ex: `~/tutenv/cert-manager-config`).
+
+    ```bash
+    mkdir -p ~/tutenv/cert-manager-config
+    cd ~/tutenv/cert-manager-config
+    vi letsencrypt-prod-clusterissuer.yaml
+    ```
+    Collez le contenu suivant. **Remplacez `ton_email@example.com` par une adresse e-mail VALIDE !**
+
+    ```yaml
+    apiVersion: cert-manager.io/v1
+    kind: ClusterIssuer
+    metadata:
+      name: letsencrypt-prod
+      annotations:
+       
+        acme.cert-manager.io/disable-challenge-http01-self-check: "true" 
+    spec:
+      acme:
+        server: https://acme-v02.api.letsencrypt.org/directory
+        email: ton_email@example.com 
+        privateKeySecretRef:
+          name: letsencrypt-prod-account-key
+        solvers:
+        - http01:
+            ingress:
+              class: nginx 
+    ```
+    > **Pourquoi ?** Le `ClusterIssuer` est une ressource globale (`Cluster`) qui permet aux Ingress de n'importe quel namespace de demander un certificat Let's Encrypt. L'annotation `disable-challenge-http01-self-check` est une correction courante pour les problèmes de routage interne sur AKS/Cloud qui empêchent Cert-Manager de vérifier sa propre validation.
+
+2.  **Application du `ClusterIssuer` :**
+    ```bash
+    kubectl apply -f letsencrypt-prod-clusterissuer.yaml
+    ```
+
+3.  **Vérification du statut du `ClusterIssuer` :**
+    ```bash
+    kubectl get clusterissuer letsencrypt-prod 
+    # La section "status.conditions" doit contenir "Ready: True".
+    ```
+    > **Validation :** Le `ClusterIssuer` est correctement configuré et prêt à interagir avec Let's Encrypt.
+
+---
+
+![alt text](Screenshots/clusterissuer.PNG)
+
+
+### **3. Configuration de l'Ingress et Validation Finale** 🔒
+
+Nous allons maintenant modifier l'objet Ingress de votre application pour qu'il demande un certificat à Cert-Manager et active le HTTPS.
+
+1.  **Modification du fichier Ingress de votre application :**
+ 
+
+    ```bash
+    cd ~/tutenv/app-de-test-2
+    vi boutique-azure-cert.yaml 
+    ```
+    Modifiez-le pour qu'il inclue les annotations Cert-Manager et la section `tls`.
+
+    ```yaml
+    apiVersion: networking.k8s.io/v1
+    kind: Ingress
+    metadata:
+      name: boutique-ingress
+      namespace: test
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-prod 
+       
+        nginx.ingress.kubernetes.io/force-ssl-redirect: "true" 
+    spec:
+      ingressClassName: nginx 
+      tls:
+      - hosts:
+        - rasleneboutique.duckdns.org # ⬅️ Votre nom de domaine public (DuckDNS)
+        secretName: boutique-tls-prod # ⬅️ Nom du Secret où Cert-Manager stockera le certificat
+      rules:
+      - host: rasleneboutique.duckdns.org # ⬅️ Votre nom de domaine public (DuckDNS)
+        http:
+          paths:
+          - path: / 
+            pathType: Prefix
+            backend:
+              service:
+                name: online-boutique-frontend-service
+                port:
+                  number: 80 
+    ```
+    
+
+2.  **Appliquer les modifications à l'Ingress :**
+    ```bash
+    kubectl apply -f boutique-azure-cert.yaml -n test
+    ```
+
+3.  **Surveillance du Processus de Certificat :**
+    *   Cert-Manager va maintenant détecter la demande. Surveillez le statut du `Certificate` :
+        ```bash
+        kubectl get certificate -n test -w
+        
+        ```
+        > **Validation :** "READY: True" signifie que le certificat a été obtenu avec succès de Let's Encrypt et est stocké dans le Secret.
+
+![alt text](Screenshots/cert-ready.PNG)
+
+
+4.  **Forçage du Rechargement de l'Ingress Controller :**
+    *   Pour s'assurer que Nginx prend en compte le nouveau certificat et la règle de redirection HTTPS :
+        ```bash
+        kubectl delete pod -n ingress-nginx -l app.kubernetes.io/component=controller
+        # Laissez le nouveau pod démarrer.
+        ```
+
+5.  **Test Final de l Sécurisation HTTPS :**
+     
+    *   Accédez à votre application via HTTPS : **`https://rasleneboutique.duckdns.org/`**
+
+    *   **Résultat Attendu :**
+        *   Vous devriez voir le **cadenas fermé** dans la barre d'adresse ! 🔒
+        *   **AUCUN avertissement de sécurité ou message "Not secure" !**
+        *   Votre application est désormais accessible de manière entièrement sécurisée et reconnue par votre navigateur.
+
+---
+
+![alt text](Screenshots/test-cert.PNG)
+
+
+
