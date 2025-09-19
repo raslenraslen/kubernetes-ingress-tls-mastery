@@ -8,7 +8,7 @@ Ce document récapitule les différentes étapes et guides que j'ai réalisés p
 
 Cliquez sur les liens ci-dessous pour accéder aux guides pas à pas de chaque étape :
 
-### **Phase 1 : Exposition Locale avec Nginx Ingress Controller** 💻
+### **Phase 1 : Exposition  avec Nginx Ingress Controller** 💻
 
 Cette phase se concentre sur l'exposition d'applications sur un cluster Kubernetes local (Kubeadm, Minikube, Kind).
 
